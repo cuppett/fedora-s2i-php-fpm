@@ -8,7 +8,6 @@ mv /tmp/src/* ./
 
 # Fix source directory permissions
 fix-permissions ./
-fix-permissions /etc/php*
 
 if [ -f composer.json ]; then
   echo "Found 'composer.json', installing dependencies using composer.phar... "
@@ -29,8 +28,8 @@ if [ -f composer.json ]; then
   if [ ! -f composer.lock ]; then
     echo -e "\nConsider adding a 'composer.lock' file into your source repository.\n"
   fi
+
+  # Fix source directory permissions
+  fix-permissions ./
 fi
 
-# Fix source directory permissions
-fix-permissions ./
-fix-permissions /etc/php*
