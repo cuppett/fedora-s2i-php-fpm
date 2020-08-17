@@ -24,6 +24,7 @@ RUN set -ex; \
     \
     dnf -y install \
         composer \
+        php-bcmath \
         php-fpm \
         php-gd \
         php-gmp \
