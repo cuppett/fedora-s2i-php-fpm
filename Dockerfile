@@ -1,4 +1,4 @@
-FROM quay.io/cuppett/fedora-s2i-php-base:32
+FROM quay.io/cuppett/fedora-s2i-php-base:latest
 
 ENV SUMMARY="PHP FPM image which allows using of source-to-image, PHP commands and Smarty templates."	\
     DESCRIPTION="The php-fpm image provides any images layered on top of it \
