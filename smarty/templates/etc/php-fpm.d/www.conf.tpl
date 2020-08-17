@@ -5,6 +5,7 @@ listen = 9000
 access.log = /proc/self/fd/2
 chdir = /var/www/html
 catch_workers_output = yes
+clear_env = no
 
 ; Process manager options
 pm = {$smarty.env.PHP_FPM_PM}
@@ -19,7 +20,6 @@ pm.status_path = /status
 ping.path = /ping
 ping.response = pong
 
-php_admin_value[variables_order] = "GPCS"
 php_admin_value[post_max_size] = {$smarty.env.PHP_POST_MAX_SIZE}
 php_admin_value[upload_max_filesize] = {$smarty.env.PHP_UPLOAD_MAX_FILESIZE}
 php_admin_value[max_file_uploads] = {$smarty.env.PHP_MAX_FILE_UPLOADS}
