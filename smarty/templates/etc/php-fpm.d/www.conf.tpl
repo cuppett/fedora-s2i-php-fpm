@@ -22,7 +22,9 @@ ping.response = pong
 
 php_admin_value[post_max_size] = {$smarty.env.PHP_POST_MAX_SIZE}
 php_admin_value[upload_max_filesize] = {$smarty.env.PHP_UPLOAD_MAX_FILESIZE}
-php_admin_value[max_file_uploads] = {$smarty.env.PHP_MAX_FILE_UPLOADS}
+
+php_value[max_file_uploads] = {$smarty.env.PHP_MAX_FILE_UPLOADS}
+php_value[max_input_vars] = {$smarty.env.PHP_MAX_INPUT_VARS}
 
 {if isset($smarty.env.REDIS_HOST) }
     php_value[session.save_handler] = redis
