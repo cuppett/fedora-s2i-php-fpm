@@ -4,8 +4,7 @@ ENV SUMMARY="PHP FPM image which allows using of source-to-image, PHP commands a
     DESCRIPTION="The php-fpm image provides any images layered on top of it \
 with all the tools needed to use php-fpm and/or source-to-image functionality while keeping \
 the image size as small as possible." \
-    NAME=fedora-s2i-php-fpm \
-    VERSION=32
+    NAME=fedora-s2i-php-fpm
 
 LABEL summary="$SUMMARY" \
       description="$DESCRIPTION" \
