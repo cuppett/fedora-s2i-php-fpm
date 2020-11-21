@@ -4,7 +4,28 @@ ENV SUMMARY="PHP FPM image which allows using of source-to-image, PHP commands a
     DESCRIPTION="The php-fpm image provides any images layered on top of it \
 with all the tools needed to use php-fpm and/or source-to-image functionality while keeping \
 the image size as small as possible." \
-    NAME=fedora-s2i-php-fpm
+    NAME=fedora-s2i-php-fpm \
+    # PHP-FPM defaults
+    PHP_FPM_PM="ondemand" \
+    PHP_FPM_MAX_CHILDREN="8" \
+    PHP_FPM_START_SERVERS="" \
+    PHP_FPM_MIN_SPARE_SERVERS="" \
+    PHP_FPM_MAX_SPARE_SERVERS="" \
+    PHP_FPM_MAX_REQUESTS="" \
+    # PHP Admin Settings
+    PHP_POST_MAX_SIZE="32M" \
+    PHP_UPLOAD_MAX_FILESIZE="2M" \
+    PHP_MAX_FILE_UPLOADS="20" \
+    PHP_MAX_INPUT_VARS="1000" \
+    # OPcache defaults
+    PHP_OPCACHE_ENABLE="1" \
+    PHP_OPCACHE_MEMORY_CONSUMPTION="128" \
+    PHP_OPCACHE_MAX_ACCELERATED_FILES="10000" \
+    PHP_OPCACHE_INTERNED_STRINGS_BUFFER="8" \
+    PHP_OPCACHE_SAVE_COMMENTS="1" \
+    PHP_OPCACHE_VALIDATE_TIMESTAMPS="1" \
+    PHP_OPCACHE_FILE_UPDATE_PROTECTION="2" \
+    PHP_OPCACHE_REVALIDATE_FREQ="2"
 
 LABEL summary="$SUMMARY" \
       description="$DESCRIPTION" \
@@ -49,8 +70,8 @@ COPY smarty /usr/local/src/smarty
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
 COPY s2i/bin/ $STI_SCRIPTS_PATH
 
-# set permissions up on the runtime locations
 RUN set -ex; \
+# set permissions up on the runtime locations
     mkdir /run/php-fpm; \
     mkdir -p /tmp/php/{session,wsdlcache}; \
     chgrp -R 0 /etc/php* ; \
@@ -59,30 +80,6 @@ RUN set -ex; \
     fix-permissions /tmp/php; \
     fix-permissions /var/www; \
     /usr/bin/php /usr/local/src/smarty/compile_templates.php
-
-# PHP-FPM defaults
-ENV PHP_FPM_PM="ondemand"
-ENV PHP_FPM_MAX_CHILDREN="8"
-ENV PHP_FPM_START_SERVERS=""
-ENV PHP_FPM_MIN_SPARE_SERVERS=""
-ENV PHP_FPM_MAX_SPARE_SERVERS=""
-ENV PHP_FPM_MAX_REQUESTS=""
-
-# PHP Admin Settings
-ENV PHP_POST_MAX_SIZE="32M"
-ENV PHP_UPLOAD_MAX_FILESIZE="2M"
-ENV PHP_MAX_FILE_UPLOADS="20"
-ENV PHP_MAX_INPUT_VARS="1000"
-
-# OPcache defaults
-ENV PHP_OPCACHE_ENABLE="1"
-ENV PHP_OPCACHE_MEMORY_CONSUMPTION="128"
-ENV PHP_OPCACHE_MAX_ACCELERATED_FILES="10000"
-ENV PHP_OPCACHE_INTERNED_STRINGS_BUFFER="8"
-ENV PHP_OPCACHE_SAVE_COMMENTS="1"
-ENV PHP_OPCACHE_VALIDATE_TIMESTAMPS="1"
-ENV PHP_OPCACHE_FILE_UPDATE_PROTECTION="2"
-ENV PHP_OPCACHE_REVALIDATE_FREQ="2"
 
 # Override stop signal to stop process gracefully
 # https://github.com/php/php-src/blob/17baa87faddc2550def3ae7314236826bc1b1398/sapi/fpm/php-fpm.8.in#L163
