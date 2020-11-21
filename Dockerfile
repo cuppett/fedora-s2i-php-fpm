@@ -76,6 +76,8 @@ RUN set -ex; \
     mkdir -p /tmp/php/{session,wsdlcache}; \
     chgrp -R 0 /etc/php* ; \
     chmod g+w -R /etc/php* ; \
+    chgrp -R 0 /usr/local/src/* ; \
+    chmod g+w -R /usr/local/src/* ; \
     fix-permissions /run/php-fpm; \
     fix-permissions /tmp/php; \
     fix-permissions /var/www; \
