@@ -1,15 +1,14 @@
 kind: BuildConfig
 apiVersion: build.openshift.io/v1
 metadata:
-  name: fedora-php-s2i-fpm-build
-  namespace: fedora-php-s2i-builds
+  name: fedora-s2i-php-fpm-33-build
   labels:
-    name: fedora-php-s2i-fpm-build
+    name: fedora-s2i-php-fpm-33-build
 spec:
   output:
     to:
       kind: DockerImage
-      name: 'quay.io/cuppett/fedora-php-s2i-fpm:32'
+      name: 'quay.io/cuppett/fedora-s2i-php:33-fpm'
     pushSecret:
       name: quayio
   resources: {}
@@ -21,16 +20,18 @@ spec:
       imageOptimizationPolicy: SkipLayers
       from:
         kind: ImageStreamTag
-        namespace: fedora-php-s2i-builds
-        name: 'fedora-php-s2i-base:32'
+        name: 'fedora-s2i-php:33'
   postCommit: {}
   source:
     type: Git
     git:
-      uri: 'https://github.com/cuppett/fedora-php-s2i'
-    contextDir: fpm
+      uri: 'https://github.com/cuppett/fedora-s2i-php-fpm'
   triggers:
     - type: ImageChange
       imageChange: {}
     - type: ConfigChange
+    - type: GitHub
+      github:
+        secretReference:
+          name: github-trigger
   runPolicy: Serial
