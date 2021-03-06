@@ -60,6 +60,9 @@ RUN set -ex; \
         php-pgsql \ 
         php-soap \
         php-xml \
+        sqlite \
+        mysql \
+        postgresql \
     ; \
     \
 # reset dnf cache
