@@ -66,8 +66,7 @@ RUN set -ex; \
     ; \
     \
 # reset dnf cache
-    dnf -y clean all; \
-    rm -rf /var/cache/dnf
+    dnf -y clean all
 
 COPY smarty /usr/local/src/smarty
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
