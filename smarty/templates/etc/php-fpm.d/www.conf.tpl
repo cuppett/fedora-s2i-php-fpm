@@ -29,7 +29,7 @@ php_value[max_input_vars] = {$smarty.env.PHP_MAX_INPUT_VARS}
 {if isset($smarty.env.REDIS_HOST) }
     php_value[session.save_handler] = redis
     php_value[session.save_path] = {strip}"tcp://{$smarty.env.REDIS_HOST}
-    :{if isset($smarty.env.REDIS_PORT)}{$smarty.env.REDIS_PORT}{else}6379{/if}
+    :{if isset($smarty.env.REDIS_HOST_PORT)}{$smarty.env.REDIS_HOST_PORT}{else}6379{/if}
     {if isset($smarty.env.REDIS_HOST_PASSWORD)}?auth={$smarty.env.REDIS_HOST_PASSWORD}{/if}
     "{/strip}
 {else}
