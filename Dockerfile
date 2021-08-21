@@ -53,6 +53,7 @@ RUN set -ex; \
         php-mysqlnd \
         php-opcache \
         php-pecl-apcu \
+        php-pecl-apcu-bc \
         php-pecl-imagick \
         php-pecl-mongodb \
         php-pecl-redis \ 
