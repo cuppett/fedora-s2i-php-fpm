@@ -1,0 +1,5 @@
+[cuppett]
+name=Cuppett.com Remi Rebuild RPM repository - Fedora $releasever - $basearch
+baseurl=https://cuppett.com/repo/fedora/releases/$releasever/$basearch/
+enabled=1
+gpgcheck=0

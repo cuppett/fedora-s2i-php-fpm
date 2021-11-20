@@ -39,13 +39,11 @@ LABEL summary="$SUMMARY" \
 
 USER 0
 
+# Install REMI repo
+COPY cuppett.repo /etc/yum.repos.d/cuppett.repo
+
 # install a robust FPM environment, composer + common webapp extensions
 RUN set -ex; \
-    \
-# Install REMI repo
-    dnf -y install 'dnf-command(config-manager)' ; \
-    dnf -y install https://rpms.remirepo.net/fedora/remi-release-35.rpm; \
-    dnf config-manager --set-enabled remi; \
 # Install required PHP packages
     dnf -y install \
         composer \
@@ -59,7 +57,6 @@ RUN set -ex; \
         php-opcache \
         php-pecl-apcu \
         php-pecl-imagick \
-        php-pecl-mongodb \
         php-pecl-redis \
         php-pecl-zip \
         php-pgsql \
@@ -76,7 +73,6 @@ RUN set -ex; \
         php74-php-pecl-apcu \
         php74-php-pecl-apcu-bc \
         php74-php-pecl-imagick \
-        php74-php-pecl-mongodb \
         php74-php-pecl-redis \
         php74-php-pecl-zip \
         php74-php-pgsql \
@@ -104,7 +100,7 @@ RUN set -ex; \
     chmod g+w -R /etc/php* ; \
     chgrp -R 0 /usr/local/src/* ; \
     chmod g+w -R /usr/local/src/* ; \
-    chmod +x /opt/remi/php74/enable; \
+    chmod +x /opt/rh/php74/enable; \
     fix-permissions /run/php-fpm; \
     fix-permissions /tmp/php; \
     fix-permissions /var/www; \

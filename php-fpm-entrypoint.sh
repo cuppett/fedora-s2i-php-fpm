@@ -7,7 +7,7 @@ PhpVer="${PHP_VERSION:-dist}"
 
 if [ "$PhpVer" = "7.4" ]
 then
-  . /opt/remi/php74/enable
+  . /opt/rh/php74/enable
 fi
 
 exec "$@"
