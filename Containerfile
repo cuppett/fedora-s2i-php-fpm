@@ -42,6 +42,11 @@ USER 0
 # install a robust FPM environment, composer + common webapp extensions
 RUN set -ex; \
     \
+# Install REMI repo
+    dnf -y install 'dnf-command(config-manager)' ; \
+    dnf -y install https://rpms.remirepo.net/fedora/remi-release-35.rpm; \
+    dnf config-manager --set-enabled remi; \
+# Install required PHP packages
     dnf -y install \
         composer \
         php-bcmath \
@@ -60,6 +65,23 @@ RUN set -ex; \
         php-pgsql \
         php-soap \
         php-xml \
+        php74-php-bcmath \
+        php74-php-fpm \
+        php74-php-gd \
+        php74-php-gmp \
+        php74-php-intl \
+        php74-php-json \
+        php74-php-mysqlnd \
+        php74-php-opcache \
+        php74-php-pecl-apcu \
+        php74-php-pecl-apcu-bc \
+        php74-php-pecl-imagick \
+        php74-php-pecl-mongodb \
+        php74-php-pecl-redis \
+        php74-php-pecl-zip \
+        php74-php-pgsql \
+        php74-php-soap \
+        php74-php-xml \
         sqlite \
         mysql \
         postgresql \
@@ -69,6 +91,8 @@ RUN set -ex; \
     dnf -y clean all
 
 COPY smarty /usr/local/src/smarty
+COPY php-fpm-entrypoint.sh /usr/local/bin
+
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
 COPY s2i/bin/ $STI_SCRIPTS_PATH
 
@@ -80,6 +104,7 @@ RUN set -ex; \
     chmod g+w -R /etc/php* ; \
     chgrp -R 0 /usr/local/src/* ; \
     chmod g+w -R /usr/local/src/* ; \
+    chmod +x /opt/remi/php74/enable; \
     fix-permissions /run/php-fpm; \
     fix-permissions /tmp/php; \
     fix-permissions /var/www; \
@@ -95,4 +120,5 @@ VOLUME /var/www/html
 
 USER 1001
 
-CMD ["/usr/sbin/php-fpm"]
+ENTRYPOINT ["/usr/local/bin/php-fpm-entrypoint.sh"]
+CMD ["php-fpm", "-c", "/etc", "-y", "/etc/php-fpm.conf"]
