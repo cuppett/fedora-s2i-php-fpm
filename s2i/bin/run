@@ -1,3 +1,1 @@
-fix-permissions /var/www
-
 exec /usr/sbin/php-fpm
