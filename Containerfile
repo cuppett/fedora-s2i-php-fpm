@@ -6,6 +6,7 @@ with all the tools needed to use php-fpm and/or source-to-image functionality wh
 the image size as small as possible." \
     NAME=fedora-s2i-php-fpm \
     # PHP-FPM defaults
+    PHP_FPM_LISTEN="9000" \
     PHP_FPM_PM="ondemand" \
     PHP_FPM_MAX_CHILDREN="8" \
     PHP_FPM_START_SERVERS="" \

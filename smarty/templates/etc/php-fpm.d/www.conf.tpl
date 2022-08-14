@@ -1,7 +1,7 @@
 {* Smarty *}
 [www]
 
-listen = 9000
+listen = {$smarty.env.PHP_FPM_LISTEN}
 access.log = /proc/self/fd/2
 chdir = /var/www/html
 catch_workers_output = yes
