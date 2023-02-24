@@ -14,7 +14,7 @@ pm.start_servers = {$smarty.env.PHP_FPM_START_SERVERS}
 pm.min_spare_servers = {$smarty.env.PHP_FPM_MIN_SPARE_SERVERS}
 pm.max_spare_servers = {$smarty.env.PHP_FPM_MAX_SPARE_SERVERS}
 pm.max_requests = {$smarty.env.PHP_FPM_MAX_REQUESTS}
-pm.process_idle_timeout = 30s;
+pm.process_idle_timeout = 10s;
 pm.status_path = /status
 
 ping.path = /ping
