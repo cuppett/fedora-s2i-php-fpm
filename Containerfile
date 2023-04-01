@@ -57,6 +57,7 @@ RUN set -ex; \
         php-pecl-imagick \
         php-pecl-mongodb \
         php-pecl-redis \
+        php-pecl-yaml \
         php-pecl-zip \
         php-pgsql \
         php-soap \
